@@ -124,29 +124,30 @@ document.write("Result: " + strNum);
 
 // Question 13: Write a program to take user input and store username in a variable. If the username contains any special symbol among [@ , . !], prompt the user to enter a valid username. For character codes of [@ . !]. Note: ASCII code of ! is 33, ASCII code of , is 44, ASCII code of . is 46, ASCII code of @ is 64
 
-var username = prompt("Enter your username:");
-var isValid = true;
+var username;
+var isValid = false;
 
-for (var i = 0; i < username.length; i++) {
-    var charCode = username.charCodeAt(i);
-    // Checking ASCII codes for '@' (64), '.' (46), ',' (44), '!' (33)
-    if (charCode === 64 || charCode === 46 || charCode === 44 || charCode === 33) {
-        isValid = false;
-        break;
-    }
-}
+for (; !isValid;) {
 
-while (!isValid) {
-    username = prompt("Please enter a valid username (without @, ., ,, !):");
+    username = prompt("Enter your username:");
     isValid = true;
+
     for (var i = 0; i < username.length; i++) {
+
         var charCode = username.charCodeAt(i);
+
         if (charCode === 64 || charCode === 46 || charCode === 44 || charCode === 33) {
             isValid = false;
             break;
         }
     }
+
+    if (!isValid) {
+        alert("Invalid username! @, ., , and ! are not allowed.");
+    }
 }
+
+alert("Valid username: " + username);
 
 document.write("Username: " + username + "<br><br>");
 
