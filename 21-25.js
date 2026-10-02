@@ -177,50 +177,59 @@ if (found) {
 
 // Question 15: Write a program to take password as an input from user. The password must qualify these requirements: a. It should contain alphabets and numbers b. It should not start with a number c. It must at least 6 characters long If the password does not meet above requirements, prompt the user to enter a valid password. For character codes of a-z, A-Z & 0-9, refer to ASCII table at the end of this document.
 var password = prompt("Enter your password:");
+var isValid = false;
 
-function isValidPassword(pwd) {
-    // Check if length is at least 6 characters
-    if (pwd.length < 6) {
+for (; isValid === false;) {
+
+    if (password.length < 6) {
+
         alert("Password must be at least 6 characters long.");
-        return false;
-    }
-    
-    // Check if it starts with a number (ASCII 48 to 57 are '0'-'9')
-    var firstChar = pwd.charCodeAt(0);
-    if (firstChar >= 48 && firstChar <= 57) {
-        alert("Password can not begin with a number.");
-        return false;
-    }
-    
-    var hasAlphabet = false;
-    var hasNumber = false;
-    
-    for (var i = 0; i < pwd.length; i++) {
-        var code = pwd.charCodeAt(i);
-        // Check for alphabets (A-Z: 65-90, a-z: 97-122)
-        if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)) {
-            hasAlphabet = true;
-        }
-        // Check for numbers (0-9: 48-57)
-        if (code >= 48 && code <= 57) {
-            hasNumber = true;
-        }
-    }
-    
-    if (!hasAlphabet || !hasNumber) {
-        alert("Password must contain both alphabets and numbers.");
-        return false;
-    }
-    
-    return true;
-}
+        password = prompt("Enter password again:");
 
-while (!isValidPassword(password)) {
-    password = prompt("Please enter a valid password:");
+    } else {
+
+        var firstChar = password.charCodeAt(0);
+
+        if (firstChar >= 48 && firstChar <= 57) {
+
+            alert("Password cannot begin with a number.");
+            password = prompt("Enter password again:");
+
+        } else {
+
+            var hasAlphabet = false;
+            var hasNumber = false;
+
+            for (var i = 0; i < password.length; i++) {
+
+                var code = password.charCodeAt(i);
+
+                if ((code >= 65 && code <= 90) ||
+                    (code >= 97 && code <= 122)) {
+
+                    hasAlphabet = true;
+
+                } else if (code >= 48 && code <= 57) {
+
+                    hasNumber = true;
+                }
+            }
+
+            if (hasAlphabet === true && hasNumber === true) {
+
+                isValid = true;
+
+            } else {
+
+                alert("Password must contain both alphabets and numbers.");
+                password = prompt("Enter password again:");
+            }
+        }
+    }
 }
 
 document.write("Entered password: " + password + "<br>");
-document.write("Password is valid!<br><br>");
+document.write("Password is valid!");
 
 
 // Question 16: Write a program to convert the following string to an array using string split method. var university = “University of Karachi”; Display the elements of array in your browser.
